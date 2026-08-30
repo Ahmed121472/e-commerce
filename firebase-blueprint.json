@@ -1,0 +1,85 @@
+{
+  "entities": {
+    "users": {
+      "title": "User Profile",
+      "description": "User profile with role (seller or customer)",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["seller", "customer"] },
+        "storeName": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "products": {
+      "title": "Product",
+      "description": "Products catalog including local and dropshipped goods",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "price": { "type": "number" },
+        "compareAtPrice": { "type": "number" },
+        "costPrice": { "type": "number" },
+        "isDropshipped": { "type": "boolean" },
+        "inventory": { "type": "number" },
+        "status": { "type": "string", "enum": ["published", "draft", "archived"] },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "badge": { "type": "string" },
+        "sellerId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "price", "category", "status"]
+    },
+    "orders": {
+      "title": "Order",
+      "description": "Customer orders with line items, shipping address, and dropship dispatch tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerEmail": { "type": "string" },
+        "userId": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "shippingFee": { "type": "number" },
+        "tax": { "type": "number" },
+        "total": { "type": "number" },
+        "totalProfit": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "processing", "shipped", "delivered", "cancelled"] },
+        "paymentStatus": { "type": "string", "enum": ["paid", "pending", "refunded"] },
+        "paymentMethod": { "type": "string" },
+        "trackingNumber": { "type": "string" },
+        "carrier": { "type": "string" },
+        "dropshipDispatched": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "customerName", "total", "status", "paymentStatus"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "#/entities/users",
+      "description": "User profile with role permission"
+    },
+    "/products/{productId}": {
+      "schema": "#/entities/products",
+      "description": "Product catalog document"
+    },
+    "/orders/{orderId}": {
+      "schema": "#/entities/orders",
+      "description": "Order records with status and profit tracking"
+    }
+  }
+}

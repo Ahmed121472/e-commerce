@@ -1,0 +1,6 @@
+{
+  "name": "Dual-Journey E-Commerce Platform",
+  "description": "In-situ e-commerce platform with customer shopping and direct on-canvas seller product editing and dropshipping management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
